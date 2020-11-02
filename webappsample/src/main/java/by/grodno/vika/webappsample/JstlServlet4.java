@@ -1,8 +1,10 @@
 package by.grodno.vika.webappsample;
 
 import java.io.IOException;
+import java.security.Timestamp;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -21,27 +23,27 @@ public class JstlServlet4 extends HttpServlet {
 		User user = UserService.getService().getUsers().get(Integer.valueOf(parameter));
 
 		resp.sendRedirect("/webappsample/jstl2.jsp?firstName=" + user.getFirstName() + "&lastName=" + user.getLastName()
-				+ "&birthdate=" + user.getBirthdate() + "&male=" + user.isMale() +"&salary=" + user.getSalary());
+				+ "&birthdate=" + user.getBirthdate() + "&male=" + user.isMale() + "&salary=" + user.getSalary() + "&id"
+				+ user.getId());
 	}
-	
-	
 
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		try {
-			User user = new User(null, 
-					             req.getParameter("firstName"), 
-					             req.getParameter("lastName"),
-					             new SimpleDateFormat("yyy-MM-dd")
-					                 .parse(req.getParameter("birthdate")),
-					             Boolean.valueOf(req.getParameter("male")));
-			user.setSalary(Double.valueOf(req.getParameter("salary")));
+			String firstName = req.getParameter("firstName");
+			String lastName = req.getParameter("lastName");
+			Date birthdate = new SimpleDateFormat("yyy-MM-dd").parse(req.getParameter("birthdate"));
+			Boolean male = Boolean.valueOf(req.getParameter("male"));
+			Integer id = Integer.valueOf(req.getParameter("id"));
+			Double salary = Double.valueOf(req.getParameter("salary"));
 			
-			UserService.getService().updateUser(user);
 
+			UserService.getService().updateUser(firstName, lastName, male, birthdate, salary, id);
 		} catch (ParseException e) {
+
 			e.printStackTrace();
 		}
+
 		resp.sendRedirect("/webappsample/jstl1");
 	}
 

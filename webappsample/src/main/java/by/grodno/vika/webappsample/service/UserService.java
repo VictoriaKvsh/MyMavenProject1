@@ -105,17 +105,17 @@ public class UserService {
 
 	}
 
-	public void updateUser(User user) {
+	public void updateUser(String firstName, String lastName, Boolean male, Date birthdate, Double salary, Integer id) {
 		try (Connection conn = DBUtils.getConnetion();
 				PreparedStatement stmt = conn.prepareStatement(SQL.UPDATE_BY_ID)) {
 
-			stmt.setString(1, user.getFirstName());
-			stmt.setString(2, user.getLastName());
-			stmt.setDouble(3, user.getSalary());
-			stmt.setTimestamp(4,
-					Timestamp.valueOf(new SimpleDateFormat("yyyy-MM-dd hh:mm:ss.SSS").format(user.getBirthdate())));
-			stmt.setBoolean(5, user.isMale());
-			stmt.setInt(6, user.getId());
+			stmt.setString(1, firstName);
+			stmt.setString(2, lastName);
+			stmt.setDouble(3, salary);
+		    stmt.setTimestamp(4,Timestamp.valueOf(new SimpleDateFormat("yyyy-MM-dd hh:mm:ss.S").format(birthdate)));
+			stmt.setBoolean(4, male);
+			stmt.setInt(5, id);
+			
 			stmt.executeUpdate();
 		} catch (Exception e) {
 			LOGGER.error("Something went wrong...", e);

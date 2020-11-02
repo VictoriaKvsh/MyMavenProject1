@@ -17,6 +17,7 @@
 				aria-describedby="basic-addon3"
 				value="<%=(request.getParameter("firstName") != null) ? request.getParameter("firstName") : ""%>">
 		</div>
+
 		<div class="input-group mb-3">
 			<div class="input-group-prepend">
 				<span class="input-group-text" id="basic-addon3">Last Name</span>
@@ -25,6 +26,7 @@
 				aria-describedby="basic-addon3"
 				value="<%=(request.getParameter("lastName") != null) ? request.getParameter("lastName") : ""%>">
 		</div>
+
 		<div class="input-group mb-3">
 			<div class="input-group-prepend">
 				<span class="input-group-text" id="basic-addon3">BirthDate</span>
@@ -34,8 +36,6 @@
 				aria-describedby="basic-addon3"
 				value="<%=(request.getParameter("birthdate") != null) ? request.getParameter("birthdate") : ""%>">
 		</div>
-
-
 
 		<div class="custom-control custom-radio">
 			<input type="radio" id="male" name="male" value="true"
@@ -47,8 +47,15 @@
 				class="custom-control-input"> <label
 				class="custom-control-label" for="female">Female</label>
 		</div>
-
-
+		
+		<div class="input-group mb-3">
+			<div class="input-group-prepend">
+				<span class="input-group-text" id="basic-addon3">Department</span>
+			</div>
+			<input type="text" class="form-control" name="department"
+				aria-describedby="basic-addon3"
+				value="<%=(request.getParameter("department") != null) ? request.getParameter("department") : ""%>">
+		</div>
 
 		<div class="input-group mb-3">
 			<div class="input-group-prepend">
@@ -58,8 +65,11 @@
 				aria-describedby="basic-addon3"
 				value="<%=(request.getParameter("salary") != null) ? request.getParameter("salary") : ""%>">
 		</div>
-		<input type="submit" class="btn btn-secondary" value="Submit new user">
-		<input type="submit" class="btn btn-secondary" value="Update user's data"
+
+		<input type="hidden" name="id"
+			value="<%=(request.getParameter("id"))%>" /> <input type="submit"
+			class="btn btn-secondary" value="Submit new user"> <input
+			type="submit" class="btn btn-secondary" value="Update user's data"
 			formaction="update">
 
 

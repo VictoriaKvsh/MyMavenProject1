@@ -25,11 +25,13 @@
 					<th scope="col">Lastname</th>
 					<th scope="col">Birthdate</th>
 					<th scope="col">Sex</th>
+					<th scope="col">Department</th>
 					<th scope="col">Salary</th>
 					<th scope="col">Actions</th>
 					<th scope="col">Update</th>
 				</tr>
 			</thead>
+			
 			<c:forEach var="i" begin="1" end="${fn:length(requestScope.users)}">
 				<c:set var="currUser" scope="request"
 					value="${requestScope.users[i-1]}" />
@@ -49,13 +51,14 @@
 							<c:when test="${requestScope.currUser.male}">Male</c:when>
 							<c:otherwise>Female</c:otherwise>
 						</c:choose></td>
+					<td>${requestScope.currUser.department}</td>	
 					<td>${requestScope.currUser.salary}</td>
 					<td><a class="btn btn-danger"
-						href="http://localhost/webappsample/user/delete?number=${requestScope.currUser.id}">Delete
+						href="http://localhost/webappsample/user/delete?number=${requestScope.currUser.id-1}">Delete
 							user</a></td>
 
 					<td><a class="btn btn-warning"
-						href="http://localhost/webappsample/update?number=${requestScope.currUser.id}">Edit
+						href="http://localhost/webappsample/update?number=${requestScope.currUser.id-1}">Edit
 							user</a></td>
 				</tr>
 

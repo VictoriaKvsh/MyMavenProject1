@@ -9,22 +9,16 @@
          First Name: <input type = "text" value="${param.firstName}">
          <br />
          Last Name: <input type = "text" value="${param.lastName}">
+         <br />                
+          BirthDate: <input type = "text" value="${param.birthdate}"/>
          <br />
-        
-                
-                <fmt:parseDate pattern="MM/dd/yyyy" value="${param.birthdate}" var="parsedDate" />
-<fmt:formatDate value="${parsedDate}" pattern="yyyy-MM-dd" />
-                
-          BirthDate: <input type = "text" value="${parsedDate}"/>
-         <br />
-          
-        
-          
           
          <input type="radio" id="male" value="${param.male==true}">
 			<label for="male">Male</label><br>
 		 <input type="radio" id="female" value="${param.male==false}">
 			<label for="female">Female</label><br>
+			Salary: <input type = "text" value="${param.salary}"/>
+         <br />
                   
          <input type = "submit" value = "Submit" />
       </form>

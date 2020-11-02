@@ -20,15 +20,29 @@ public class JstlServlet4 extends HttpServlet {
 
 		User user = UserService.getService().getUsers().get(Integer.valueOf(parameter));
 
-		resp.sendRedirect("/webappsample/jstl3.jsp?firstName=" + user.getFirstName() + "&lastName=" + user.getLastName()
-				+ "&birthdate=" + user.getBirthdate() + "&male=" + user.isMale());
+		resp.sendRedirect("/webappsample/jstl2.jsp?firstName=" + user.getFirstName() + "&lastName=" + user.getLastName()
+				+ "&birthdate=" + user.getBirthdate() + "&male=" + user.isMale() +"&salary=" + user.getSalary());
 	}
 	
 	
 
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		try {
+			User user = new User(null, 
+					             req.getParameter("firstName"), 
+					             req.getParameter("lastName"),
+					             new SimpleDateFormat("yyy-MM-dd")
+					                 .parse(req.getParameter("birthdate")),
+					             Boolean.valueOf(req.getParameter("male")));
+			user.setSalary(Double.valueOf(req.getParameter("salary")));
+			
+			UserService.getService().updateUser(user);
 
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+		resp.sendRedirect("/webappsample/jstl1");
 	}
 
 }

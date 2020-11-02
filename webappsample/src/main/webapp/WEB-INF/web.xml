@@ -6,6 +6,7 @@
 	version="4.0">
 
 	<display-name>Archetype Created Web Application</display-name>
+	
 
 	<servlet>
 		<servlet-name>Jstl1</servlet-name>
@@ -29,7 +30,7 @@
 
 	<servlet-mapping>
 		<servlet-name>Jstl4</servlet-name>
-		<url-pattern>/user/edit</url-pattern>
+		<url-pattern>/update</url-pattern>
 	</servlet-mapping>
 
 	<servlet-mapping>

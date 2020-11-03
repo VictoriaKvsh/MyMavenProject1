@@ -8,4 +8,5 @@ public class SQL {
 			+ "(empl_name, empl_last_name, salary, birthdate,  male) VALUES (?,?,?,?,?)";
 	public static final String UPDATE_BY_ID = "UPDATE public.testtable SET empl_name = ?, empl_last_name = ?, salary = ?,  birthdate = ?,  male = ? where id = ?";
 	public static final String SELECT_ALL_DEP = "select * from public.dept order by id";
+	public static final String DELETE_BY_ID_DEP = "delete from public.dept where id = ?";
 }

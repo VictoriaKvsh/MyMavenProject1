@@ -1,6 +1,7 @@
 package by.grodno.vika.webappsample.service;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -8,6 +9,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.log4j.Logger;
+
+
 
 
 public class DepService {
@@ -23,7 +26,7 @@ public class DepService {
 	private DepService() {
 	}
 
-	public static DepService getInstance() {
+	public static DepService getService() {
 
 		synchronized (monitor) {
 			if (service == null) {
@@ -67,6 +70,20 @@ public class DepService {
 		dep.setDepName(executeQuery.getString(2));
 		
 		result.add(dep);
+	}
+	
+	public void deleteDep(Integer id) {
+		try (Connection conn = DBUtils.getConnetion();
+				PreparedStatement stmt = conn.prepareStatement(SQL.DELETE_BY_ID_DEP)) {
+
+			stmt.setInt(1, id);
+
+			stmt.execute();
+
+		} catch (Exception e) {
+			LOG.error("Something went wrong...", e);
+		}
+
 	}
 
 }

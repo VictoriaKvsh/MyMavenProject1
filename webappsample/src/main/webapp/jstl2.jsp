@@ -39,18 +39,21 @@
 
 		<div class="custom-control custom-radio">
 			<input type="radio" id="male" name="male" value="true"
+				${param.male == 'true' ? 'checked' : ''}
 				class="custom-control-input"> <label
 				class="custom-control-label" for="male">Male</label>
 		</div>
 		<div class="custom-control custom-radio">
 			<input type="radio" id="female" name="male" value="false"
+				${param.male == 'false' ? 'checked' : ''}
 				class="custom-control-input"> <label
 				class="custom-control-label" for="female">Female</label>
 		</div>
-		
+
 		<div class="input-group mb-3">
 			<div class="input-group-prepend">
-				<span class="input-group-text" id="basic-addon3">Department</span>
+				<span class="input-group-text" id="basic-addon3">Number of
+					Department</span>
 			</div>
 			<input type="text" class="form-control" name="department"
 				aria-describedby="basic-addon3"
@@ -67,10 +70,27 @@
 		</div>
 
 		<input type="hidden" name="id"
-			value="<%=(request.getParameter("id"))%>" /> <input type="submit"
-			class="btn btn-secondary" value="Submit new user"> <input
-			type="submit" class="btn btn-secondary" value="Update user's data"
-			formaction="update">
+			value="<%=(request.getParameter("id"))%>" />
+
+
+		<c:choose>
+
+			<c:when test="${param.lastName == null}">
+
+				<input type="submit" class="btn btn-secondary"
+					value="Submit new user">
+			</c:when>
+			<c:otherwise>
+
+				<input type="submit" class="btn btn-secondary"
+					value="Update user's data" formaction="update">
+			</c:otherwise>
+		</c:choose>
+
+
+
+
+
 
 
 	</form>

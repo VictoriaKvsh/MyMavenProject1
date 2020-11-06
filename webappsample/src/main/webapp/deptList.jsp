@@ -19,8 +19,8 @@
 				<tr>
 					<th scope="col">Num</th>
 					<th scope="col">Department name</th>
+					<th scope="col">Users of same Dept</th>
 					<th scope="col">Action</th>
-					<th scope="col">Update</th>
 
 				</tr>
 			</thead>
@@ -30,19 +30,21 @@
 					<td scope="row">${department.id}</td>
 					<td>${department.depName}</td>
 
+
+					<td><a class="btn btn-primary"
+						href="http://localhost/webappsample/dep/listOfUsers?id=${department.id}">List
+							of Users</a></td>
+
 					<td><a class="btn btn-danger"
 						href="http://localhost/webappsample/dep/delete?id=${department.id}">Delete
 							department</a></td>
-							
-							
-				</tr>
 
+				</tr>
 			</c:forEach>
 		</table>
 	</c:if>
-		<a class="btn btn-primary"
+	<a class="btn btn-success"
 		href="http://localhost/webappsample/depListAdd.jsp">Add Department</a>
 
 </body>
 </html>
-	

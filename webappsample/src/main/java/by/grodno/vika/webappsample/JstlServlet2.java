@@ -25,6 +25,7 @@ public class JstlServlet2 extends HttpServlet {
 					                 .parse(req.getParameter("birthdate")),
 					             Boolean.valueOf(req.getParameter("male")));
 			user.setSalary(Double.valueOf(req.getParameter("salary")));
+			user.setDepartment(Integer.valueOf(req.getParameter("department")));
 			
 			UserService.getService().addUser(user);
 

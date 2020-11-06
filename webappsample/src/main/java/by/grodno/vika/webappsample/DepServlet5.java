@@ -18,10 +18,10 @@ public class DepServlet5  extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-		List<Department> data = DepService.getService().getCarList();
+		List<Department> data = DepService.getService().getDepList();
 		
 		req.setAttribute("department", data);
 	
-		getServletContext().getRequestDispatcher("/dList.jsp").forward(req, resp);
+		getServletContext().getRequestDispatcher("/deptList.jsp").forward(req, resp);
 	}
 }

@@ -23,7 +23,7 @@ public class JstlServlet4 extends HttpServlet {
 		User user = UserService.getService().getUsers().get(Integer.valueOf(parameter));
 
 		resp.sendRedirect("/webappsample/jstl2.jsp?firstName=" + user.getFirstName() + "&lastName=" + user.getLastName()
-				+ "&birthdate=" + user.getBirthdate() + "&male=" + user.isMale() + "&salary=" + user.getSalary() + "&id"
+				+ "&birthdate=" + user.getBirthdate() + "&male=" + user.isMale() + "&salary=" + user.getSalary() + "&department=" + user.getDepartment() + "&id="
 				+ user.getId());
 	}
 
@@ -33,12 +33,14 @@ public class JstlServlet4 extends HttpServlet {
 			String firstName = req.getParameter("firstName");
 			String lastName = req.getParameter("lastName");
 			Date birthdate = new SimpleDateFormat("yyy-MM-dd").parse(req.getParameter("birthdate"));
-			Boolean male = Boolean.valueOf(req.getParameter("male"));
 			Integer id = Integer.valueOf(req.getParameter("id"));
+			
+			Boolean male = Boolean.valueOf(req.getParameter("male"));			
 			Double salary = Double.valueOf(req.getParameter("salary"));
+			Integer department = Integer.valueOf(req.getParameter("department"));
 			
 
-			UserService.getService().updateUser(firstName, lastName, male, birthdate, salary, id);
+			UserService.getService().updateUser(firstName, lastName, male, birthdate, salary, department, id);
 		} catch (ParseException e) {
 
 			e.printStackTrace();

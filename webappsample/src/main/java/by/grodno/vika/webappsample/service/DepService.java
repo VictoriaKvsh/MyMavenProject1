@@ -10,9 +10,6 @@ import java.util.List;
 
 import org.apache.log4j.Logger;
 
-
-
-
 public class DepService {
 
 	private static final Logger LOG = Logger.getLogger(DepService.class);
@@ -20,8 +17,6 @@ public class DepService {
 	private static DepService service;
 
 	private static final Object monitor = new Object();
-
-	
 
 	private DepService() {
 	}
@@ -37,7 +32,7 @@ public class DepService {
 		return service;
 	}
 
-	public List<Department> getCarList() {
+	public List<Department> getDepList() {
 
 		List<Department> result = new ArrayList<Department>();
 
@@ -68,10 +63,10 @@ public class DepService {
 		Department dep = new Department();
 		dep.setId(executeQuery.getInt(1));
 		dep.setDepName(executeQuery.getString(2));
-		
+
 		result.add(dep);
 	}
-	
+
 	public void deleteDep(Integer id) {
 		try (Connection conn = DBUtils.getConnetion();
 				PreparedStatement stmt = conn.prepareStatement(SQL.DELETE_BY_ID_DEP)) {
@@ -79,6 +74,22 @@ public class DepService {
 			stmt.setInt(1, id);
 
 			stmt.execute();
+
+		} catch (Exception e) {
+			LOG.error("Something went wrong...", e);
+		}
+
+	}
+
+	public void addDep(Department dep) {
+		try (Connection conn = DBUtils.getConnetion(); PreparedStatement stmt = conn.prepareStatement(SQL.INSERT_DEP)) {
+
+			stmt.setInt(1, dep.getId());
+			stmt.setString(2, dep.getDepName());
+
+			stmt.executeUpdate();
+
+			LOG.info("Department is created");
 
 		} catch (Exception e) {
 			LOG.error("Something went wrong...", e);

@@ -11,9 +11,9 @@
 	crossorigin="anonymous">
 <body>
 	<%@ include file="fragments/header.jsp"%>
-	
-	
-	
+
+
+
 	<form action="user" method="POST">
 
 
@@ -22,8 +22,7 @@
 				<span class="input-group-text" id="basic-addon3">First Name</span>
 			</div>
 			<input type="text" class="form-control" name="firstName"
-				aria-describedby="basic-addon3"
-				value="${user.firstName}">
+				aria-describedby="basic-addon3" value="${user.firstName}">
 		</div>
 
 		<div class="input-group mb-3">
@@ -31,8 +30,7 @@
 				<span class="input-group-text" id="basic-addon3">Last Name</span>
 			</div>
 			<input type="text" class="form-control" name="lastName"
-				aria-describedby="basic-addon3"
-				value="${user.lastName}">
+				aria-describedby="basic-addon3" value="${user.lastName}">
 		</div>
 
 		<div class="input-group mb-3">
@@ -41,15 +39,13 @@
 			</div>
 			<input type="text" class="form-control"
 				placeholder="yyyy-mm-dd hh:mm:ss" name="birthdate"
-				aria-describedby="basic-addon3"
-				value="${user.birthdate}">
+				aria-describedby="basic-addon3" value="${user.birthdate}">
 		</div>
 
 		<div class="custom-control custom-radio">
 			<input type="radio" id="male" name="male" value="true"
-				${user.male == 'true' ? 'checked' : ''}
-				class="custom-control-input"> <label
-				class="custom-control-label" for="male">Male</label>
+				${user.male == 'true' ? 'checked' : ''} class="custom-control-input">
+			<label class="custom-control-label" for="male">Male</label>
 		</div>
 		<div class="custom-control custom-radio">
 			<input type="radio" id="female" name="male" value="false"
@@ -58,27 +54,35 @@
 				class="custom-control-label" for="female">Female</label>
 		</div>
 
-		<div class="input-group mb-3">
-			<div class="input-group-prepend">
-				<span class="input-group-text" id="basic-addon3">Number of
-					Department</span>
-			</div>
-			<input type="text" class="form-control" name="department"
-				aria-describedby="basic-addon3"
-				value="${user.department}">
-		</div>
+
+	<label for="department">Departments</label> <select name="department">
+			<c:forEach items="${department}" var="dept">
+				<option value="${department.id}">${department.depName}</option>
+			</c:forEach>
+			
+		</select>
+
+
+
+
+
+
+
+
+
+
+
+
 
 		<div class="input-group mb-3">
 			<div class="input-group-prepend">
 				<span class="input-group-text" id="basic-addon3">Salary</span>
 			</div>
 			<input type="text" class="form-control" name="salary"
-				aria-describedby="basic-addon3"
-				value="${user.salary}">
+				aria-describedby="basic-addon3" value="${user.salary}">
 		</div>
 
-		<input type="hidden" name="id"
-			value="${user.id}">
+		<input type="hidden" name="id" value="${user.id}">
 
 
 		<c:choose>

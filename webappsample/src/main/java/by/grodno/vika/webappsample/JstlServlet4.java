@@ -22,6 +22,7 @@ public class JstlServlet4 extends HttpServlet {
 		User user = UserService.getService().getUsers().get(Integer.valueOf(parameter));
 
 		req.setAttribute("user", user);
+		
 		getServletContext().getRequestDispatcher("/jstl2.jsp").forward(req, resp);
 
 	}

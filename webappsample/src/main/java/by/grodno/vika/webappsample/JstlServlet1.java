@@ -7,6 +7,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import by.grodno.vika.webappsample.service.DepService;
+import by.grodno.vika.webappsample.service.Department;
 import by.grodno.vika.webappsample.service.User;
 import by.grodno.vika.webappsample.service.UserService;
 
@@ -14,11 +16,13 @@ import by.grodno.vika.webappsample.service.UserService;
  * Servlet implementation class JstlServlet1
  */
 public class JstlServlet1 extends HttpServlet {
-	
+
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		List<User> users = UserService.getService().getUsers();
+		List<Department> data = DepService.getService().getDepList();
 
+		request.setAttribute("department", data);
 		request.setAttribute("users", users);
 
 		getServletContext().getRequestDispatcher("/jstl1.jsp").forward(request, response);

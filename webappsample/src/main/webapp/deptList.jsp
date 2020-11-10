@@ -45,6 +45,8 @@
 	</c:if>
 	<a class="btn btn-success"
 		href="http://localhost/webappsample/depListAdd.jsp">Add Department</a>
+		<a class="btn btn-primary"
+		href="http://localhost/webappsample/jstl1">User list</a>
 
 </body>
 </html>

@@ -13,8 +13,7 @@
 	<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 	<%@ include file="fragments/header.jsp"%>
 
-	<br />
-
+	
 
 	<c:if test="${requestScope.users != null}">
 		<table class="table">
@@ -56,11 +55,11 @@
 					
 					<td>${requestScope.currUser.salary}</td>
 					<td><a class="btn btn-danger"
-						href="http://localhost/webappsample/user/delete?number=${requestScope.currUser.id}">Delete
+						href="http://localhost/webappsample/user/delete?number=${i-1}">Delete
 							user</a></td>
 
 					<td><a class="btn btn-warning"
-						href="http://localhost/webappsample/update?number=${requestScope.currUser.id}">Edit
+						href="http://localhost/webappsample/update?number=${i-1}">Edit
 							user</a></td>
 				</tr>
 
@@ -68,8 +67,11 @@
 		</table>
 	</c:if>
 
-	<a class="btn btn-primary"
+	<a class="btn btn-warning"
 		href="http://localhost/webappsample/jstl2.jsp">Add user</a>
+		<a class="btn btn-primary"
+		href="http://localhost/webappsample/dep">Department list</a>
+		
 
 	<br />
 	<br />

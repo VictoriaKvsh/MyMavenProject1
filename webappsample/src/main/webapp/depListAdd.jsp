@@ -9,13 +9,7 @@
 	<form action="add_dep" method="POST">
 
 
-		<div class="input-group mb-3">
-			<div class="input-group-prepend">
-				<span class="input-group-text" id="basic-addon3">Number of Department </span>
-			</div>
-			<input type="text" class="form-control" name="id"
-				aria-describedby="basic-addon3">
-		</div>
+		
 
 		<div class="input-group mb-3">
 			<div class="input-group-prepend">

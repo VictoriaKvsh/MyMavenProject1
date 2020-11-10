@@ -21,6 +21,6 @@ public class UsersAndDeptServlet8 extends HttpServlet {
 		List<User> users = UserService.getService().getUsersWithDept(parameter);
 		request.setAttribute("users", users);
 
-		getServletContext().getRequestDispatcher("/userAndDeptList.jsp").forward(request, response);
+		getServletContext().getRequestDispatcher("/jstl1.jsp").forward(request, response);
 	}
 }

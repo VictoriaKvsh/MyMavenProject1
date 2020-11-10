@@ -18,7 +18,7 @@ public class DepAddServlet7 extends HttpServlet {
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
 		Department dep = new Department();
-		dep.setId(Integer.valueOf(req.getParameter("id")));
+		
 		dep.setDepName(req.getParameter("department"));
 
 		DepService.getService().addDep(dep);

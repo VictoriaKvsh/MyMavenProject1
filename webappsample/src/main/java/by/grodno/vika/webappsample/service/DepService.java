@@ -82,15 +82,18 @@ public class DepService {
 	}
 
 	public void addDep(Department dep) {
-		try (Connection conn = DBUtils.getConnetion(); PreparedStatement stmt = conn.prepareStatement(SQL.INSERT_DEP)) {
+		try (Connection conn = DBUtils.getConnetion(); PreparedStatement stmt = conn.prepareStatement(SQL.INSERT_DEP, Statement.RETURN_GENERATED_KEYS)) {
 
-			stmt.setInt(1, dep.getId());
-			stmt.setString(2, dep.getDepName());
+			
+			stmt.setString(1, dep.getDepName());
 
+			
 			stmt.executeUpdate();
-
-			LOG.info("Department is created");
-
+			ResultSet generatedKeys = stmt.getGeneratedKeys();
+			generatedKeys.next();
+			
+			LOG.info("Department is created with number " + generatedKeys.getLong(1));
+	
 		} catch (Exception e) {
 			LOG.error("Something went wrong...", e);
 		}

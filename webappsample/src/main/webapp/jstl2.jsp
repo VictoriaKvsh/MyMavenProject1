@@ -1,4 +1,9 @@
+<%@page import="by.grodno.vika.webappsample.service.User"%>
+<%@page import="java.text.SimpleDateFormat"%>
+<%@page import="java.util.Date"%>
+
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
 <html>
 <link rel="stylesheet"
 	href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
@@ -6,6 +11,9 @@
 	crossorigin="anonymous">
 <body>
 	<%@ include file="fragments/header.jsp"%>
+	
+	
+	
 	<form action="user" method="POST">
 
 
@@ -15,7 +23,7 @@
 			</div>
 			<input type="text" class="form-control" name="firstName"
 				aria-describedby="basic-addon3"
-				value="<%=(request.getParameter("firstName") != null) ? request.getParameter("firstName") : ""%>">
+				value="${user.firstName}">
 		</div>
 
 		<div class="input-group mb-3">
@@ -24,7 +32,7 @@
 			</div>
 			<input type="text" class="form-control" name="lastName"
 				aria-describedby="basic-addon3"
-				value="<%=(request.getParameter("lastName") != null) ? request.getParameter("lastName") : ""%>">
+				value="${user.lastName}">
 		</div>
 
 		<div class="input-group mb-3">
@@ -34,18 +42,18 @@
 			<input type="text" class="form-control"
 				placeholder="yyyy-mm-dd hh:mm:ss" name="birthdate"
 				aria-describedby="basic-addon3"
-				value="<%=(request.getParameter("birthdate") != null) ? request.getParameter("birthdate") : ""%>">
+				value="${user.birthdate}">
 		</div>
 
 		<div class="custom-control custom-radio">
 			<input type="radio" id="male" name="male" value="true"
-				${param.male == 'true' ? 'checked' : ''}
+				${user.male == 'true' ? 'checked' : ''}
 				class="custom-control-input"> <label
 				class="custom-control-label" for="male">Male</label>
 		</div>
 		<div class="custom-control custom-radio">
 			<input type="radio" id="female" name="male" value="false"
-				${param.male == 'false' ? 'checked' : ''}
+				${user.male == 'false' ? 'checked' : ''}
 				class="custom-control-input"> <label
 				class="custom-control-label" for="female">Female</label>
 		</div>
@@ -57,7 +65,7 @@
 			</div>
 			<input type="text" class="form-control" name="department"
 				aria-describedby="basic-addon3"
-				value="<%=(request.getParameter("department") != null) ? request.getParameter("department") : ""%>">
+				value="${user.department}">
 		</div>
 
 		<div class="input-group mb-3">
@@ -66,16 +74,16 @@
 			</div>
 			<input type="text" class="form-control" name="salary"
 				aria-describedby="basic-addon3"
-				value="<%=(request.getParameter("salary") != null) ? request.getParameter("salary") : ""%>">
+				value="${user.salary}">
 		</div>
 
 		<input type="hidden" name="id"
-			value="<%=(request.getParameter("id"))%>" />
+			value="${user.id}">
 
 
 		<c:choose>
 
-			<c:when test="${param.lastName == null}">
+			<c:when test="${user.lastName == null}">
 
 				<input type="submit" class="btn btn-secondary"
 					value="Submit new user">

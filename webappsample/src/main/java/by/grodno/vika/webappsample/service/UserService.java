@@ -70,9 +70,6 @@ public class UserService {
 		return user;
 	};
 
-	
-	
-	
 	public void deleteUser(Integer number) {
 		try (Connection conn = DBUtils.getConnetion();
 				PreparedStatement stmt = conn.prepareStatement(SQL.DELETE_BY_ID)) {
@@ -102,7 +99,7 @@ public class UserService {
 			stmt.executeUpdate();
 
 			ResultSet generatedKeys = stmt.getGeneratedKeys();
-			generatedKeys.next();
+			generatedKeys.isAfterLast();
 			LOGGER.info("User created with id: " + generatedKeys.getLong(1));
 
 		} catch (Exception e) {
@@ -111,45 +108,39 @@ public class UserService {
 
 	}
 
-	public void updateUser(String firstName, String lastName, Boolean male, Date birthdate, Double salary, Integer department, Integer id) {
+	public void updateUser(User user) {
 		try (Connection conn = DBUtils.getConnetion();
 				PreparedStatement stmt = conn.prepareStatement(SQL.UPDATE_BY_ID)) {
 
-			stmt.setString(1, firstName);
-			stmt.setString(2, lastName);
-			stmt.setDouble(3, salary);
-		    stmt.setTimestamp(4,Timestamp.valueOf(new SimpleDateFormat("yyyy-MM-dd hh:mm:ss.S").format(birthdate)));
-			stmt.setBoolean(5, male);
-			stmt.setInt(6, department);
-			stmt.setInt(7, id);
-			
+			stmt.setString(1, user.getFirstName());
+			stmt.setString(2, user.getLastName());
+			stmt.setDouble(3, user.getSalary());
+			stmt.setTimestamp(4,
+					Timestamp.valueOf(new SimpleDateFormat("yyyy-MM-dd hh:mm:ss.S").format(user.getBirthdate())));
+			stmt.setBoolean(5, user.isMale());
+			stmt.setInt(6, user.getDepartment());
+			stmt.setInt(7, user.getId());
+
 			stmt.executeUpdate();
 		} catch (Exception e) {
 			LOGGER.error("Something went wrong...", e);
 		}
 	}
-	
-	
-	public List<User> getUsersWithDept (Integer depNum) {
+
+	public List<User> getUsersWithDept(Integer depNum) {
 		List<User> result = new ArrayList<User>();
 		try (Connection conn = DBUtils.getConnetion(); Statement stmt = conn.createStatement()) {
+
+			String sql = "SELECT t.id , t.empl_name, t.empl_last_name, t.birthdate, t.male, t.salary, t.dept_num, d.dept_name\r\n"
+					+ "FROM public.testtable t\r\n" + "LEFT JOIN public.dept d ON d.id = t.dept_num\r\n"
+					+ "WHERE t.dept_num IN ("+depNum+") \r\n" + "ORDER BY t.id";
 			
-			String sql = "SELECT t.id , t.empl_name, t.empl_last_name, t.birthdate, t.male, t.salary\r\n" + 
-					"   FROM public.testtable t\r\n" + 
-					"   WHERE t.dept_num IN ("+depNum+") \r\n" + 
-					"   ORDER BY t.id";
 			ResultSet rs = stmt.executeQuery(sql);
-			
+
 			while (rs.next()) {
-				Integer id = rs.getInt(1);
-				String fName = rs.getString(2);
-				String lName = rs.getString(3);
-				Double sal = rs.getDouble(6);
-				Date date = rs.getTimestamp(4);
-				Boolean male = rs.getBoolean(5);
-				User user = new User(id, fName, lName, date, male);
-				user.setSalary(sal);	
-				
+
+				User user = mapRawToUser(rs);
+
 				result.add(user);
 			}
 
